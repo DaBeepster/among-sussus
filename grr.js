@@ -18,3 +18,13 @@ function loadFour() {
   var yea = localStorage.fourthSave;
   area.value = yea;
 }
+function saveFive() {
+  var area = document.getElementById('heh');
+  var conten = area.value;
+  localStorage.fiveSave = conten;
+}
+function loadFive() {
+  var area = document.getElementById('heh');
+  var yesh = localStorage.fiveSave;
+  area.value = yesh;
+}
