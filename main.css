@@ -1,0 +1,14 @@
+.hi {
+  display: inline-block;
+  max-width: 100%;
+  word-wrap: break-word;
+  font-family: monospace;
+}
+.buts {
+  max-width: 25%;
+  display: inline-block;
+}
+.tex {
+  max-width: 65%;
+  max-height: 50%;
+}

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAS1BMVEUAAADsxADsxADsxADsxADsxADsxADsxADw0DP355n566rtyBHx1ET677v03Gb14Hfy2FX////244j788zvzCL+++78993sxADsxABAn0QcAAAAGXRSTlMATb7z/0yE8v///////////////////070K8vyUwAAANZJREFUeAHdk1dihDAQQ40RxY21aNn7nzSa9Gq+k0cV84Zu51zne/xI7wcnRjQYnRvQpHMeTbyb0GRyuODfCHOIIQHIsSx4Yrkp1xht41BpJNwoCsRqUSthQooVG2siZ1uA/ORv2iV3CcZT8QAiK2SVpzMcG088C7b3JpycA5OyWJ6FSKY3IXJLhVleXF4uUXgkWAdwMPOZdNAqVUJQPBjUcm6S1hLjwZK0qJKfBRGxH7QDRmBCpgif3+S+A59i+jOfe0KT/nrgdGjSXQ5e8eDv+JG7V/8jf1EZOLj69NcAAAAASUVORK5CYII=" />
+  <title>2048 Game</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    #game-board {
+      display: grid;
+      grid-template-columns: repeat(4, 100px);
+      gap: 10px;
+      font-size: 24px;
+    }
+
+    .tile {
+      width: 100px;
+      height: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+
+    .tile-2 { background-color: #eee4da; color: #776e65; } /*#eee4da*/
+    .tile-4 { background-color: #00ff00; color: #776e65; } /*#ede0c8, #776e65*/
+    .tile-8 { background-color: #ff0000; color: #f9f6f2; } /*#f2b179, #f9f6f2*/
+    .tile-16 { background-color: #f59563; color: #f9f6f2; }
+    .tile-32 { background-color: #f67c5f; color: #f9f6f2; }
+    .tile-64 { background-color: #f65e3b; color: #f9f6f2; }
+    .tile-128 { background-color: #edcf72; color: #f9f6f2; }
+    .tile-256 { background-color: #edcc61; color: #f9f6f2; }
+    .tile-512 { background-color: #edc850; color: #f9f6f2; }
+    .tile-1024 { background-color: #edc53f; color: #f9f6f2; }
+    .tile-2048 { background-color: #edc22e; color: #f9f6f2; }
+  </style>
+</head>
+<body>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const gridSize = 4;
+    let board = Array.from({ length: gridSize }, () => Array(gridSize).fill(0));
+
+    function initializeBoard() {
+      addRandomTile();
+      addRandomTile();
+      renderBoard();
+    }
+
+    function renderBoard() {
+      const gameBoardElement = document.getElementById('game-board');
+      gameBoardElement.innerHTML = '';
+
+      for (let i = 0; i < gridSize; i++) {
+        for (let j = 0; j < gridSize; j++) {
+          const tileValue = board[i][j];
+          const tileElement = document.createElement('div');
+          tileElement.className = `tile tile-${tileValue}`;
+          tileElement.textContent = tileValue !== 0 ? tileValue : '';
+          gameBoardElement.appendChild(tileElement);
+        }
+      }
+    }
+
+    function addRandomTile() {
+      const emptyTiles = [];
+      for (let i = 0; i < gridSize; i++) {
+        for (let j = 0; j < gridSize; j++) {
+          if (board[i][j] === 0) {
+            emptyTiles.push({ row: i, col: j });
+          }
+        }
+      }
+
+      if (emptyTiles.length > 0) {
+        const { row, col } = emptyTiles[Math.floor(Math.random() * emptyTiles.length)];
+        board[row][col] = Math.random() < 0.9 ? 2 : 4;
+      }
+    }
+
+    function handleKeyPress(event) {
+      let moved = false;
+
+      switch (event.key) {
+        case 'ArrowUp':
+          moved = moveUp();
+          break;
+        case 'ArrowDown':
+          moved = moveDown();
+          break;
+        case 'ArrowLeft':
+          moved = moveLeft();
+          break;
+        case 'ArrowRight':
+          moved = moveRight();
+          break;
+      }
+
+      if (moved) {
+        addRandomTile();
+        renderBoard();
+        // Add logic to check for game over or victory
+      }
+    }
+
+    function moveUp() {
+      let moved = false;
+
+      for (let col = 0; col < gridSize; col++) {
+        for (let row = 1; row < gridSize; row++) {
+          if (board[row][col] !== 0) {
+            let currentRow = row;
+            while (currentRow > 0 && board[currentRow - 1][col] === 0) {
+              board[currentRow - 1][col] = board[currentRow][col];
+              board[currentRow][col] = 0;
+              currentRow--;
+              moved = true;
+            }
+
+            if (currentRow > 0 && board[currentRow - 1][col] === board[currentRow][col]) {
+              board[currentRow - 1][col] *= 2;
+              board[currentRow][col] = 0;
+              moved = true;
+            }
+          }
+        }
+      }
+
+      return moved;
+    }
+
+    function moveDown() {
+      let moved = false;
+
+      for (let col = 0; col < gridSize; col++) {
+        for (let row = gridSize - 2; row >= 0; row--) {
+          if (board[row][col] !== 0) {
+            let currentRow = row;
+            while (currentRow < gridSize - 1 && board[currentRow + 1][col] === 0) {
+              board[currentRow + 1][col] = board[currentRow][col];
+              board[currentRow][col] = 0;
+              currentRow++;
+              moved = true;
+            }
+
+            if (currentRow < gridSize - 1 && board[currentRow + 1][col] === board[currentRow][col]) {
+              board[currentRow + 1][col] *= 2;
+              board[currentRow][col] = 0;
+              moved = true;
+            }
+          }
+        }
+      }
+
+      return moved;
+    }
+
+    function moveLeft() {
+      let moved = false;
+
+      for (let row = 0; row < gridSize; row++) {
+        for (let col = 1; col < gridSize; col++) {
+          if (board[row][col] !== 0) {
+            let currentCol = col;
+            while (currentCol > 0 && board[row][currentCol - 1] === 0) {
+              board[row][currentCol - 1] = board[row][currentCol];
+              board[row][currentCol] = 0;
+              currentCol--;
+              moved = true;
+            }
+
+            if (currentCol > 0 && board[row][currentCol - 1] === board[row][currentCol]) {
+              board[row][currentCol - 1] *= 2;
+              board[row][currentCol] = 0;
+              moved = true;
+            }
+          }
+        }
+      }
+
+      return moved;
+    }
+
+    function moveRight() {
+      let moved = false;
+
+      for (let row = 0; row < gridSize; row++) {
+        for (let col = gridSize - 2; col >= 0; col--) {
+          if (board[row][col] !== 0) {
+            let currentCol = col;
+            while (currentCol < gridSize - 1 && board[row][currentCol + 1] === 0) {
+              board[row][currentCol + 1] = board[row][currentCol];
+              board[row][currentCol] = 0;
+              currentCol++;
+              moved = true;
+            }
+
+            if (currentCol < gridSize - 1 && board[row][currentCol + 1] === board[row][currentCol]) {
+              board[row][currentCol + 1] *= 2;
+              board[row][currentCol] = 0;
+              moved = true;
+            }
+          }
+        }
+      }
+
+      return moved;
+    }
+
+    document.addEventListener('keydown', handleKeyPress);
+
+    initializeBoard();
+  });
+</script>
+
+<div id="game-board"></div>
+
+</body>
+</html>

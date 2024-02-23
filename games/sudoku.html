@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Random Sudoku Game</title>
+  <style>
+    /* Add some basic styling if you'd like */
+    input {
+      width: 30px;
+      height: 30px;
+      text-align: center;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+<script>
+  // Define the Sudoku board
+  let board;
+
+  // Function to initialize the board
+  function init() {
+    board = generateRandomPuzzle();
+    displayBoard();
+  }
+
+  // Function to generate a random Sudoku puzzle
+  function generateRandomPuzzle() {
+    // Start with a solved Sudoku grid
+    const solvedGrid = [
+      [5, 3, 4, 6, 7, 8, 9, 1, 2],
+      [6, 7, 2, 1, 9, 5, 3, 4, 8],
+      [1, 9, 8, 3, 4, 2, 5, 6, 7],
+      [8, 5, 9, 7, 6, 1, 4, 2, 3],
+      [4, 2, 6, 8, 5, 3, 7, 9, 1],
+      [7, 1, 3, 9, 2, 4, 8, 5, 6],
+      [9, 6, 1, 5, 3, 7, 2, 8, 4],
+      [2, 8, 7, 4, 1, 9, 6, 3, 5],
+      [3, 4, 5, 2, 8, 6, 1, 7, 9]
+    ];
+
+    // Create a copy of the solved grid
+    const newBoard = solvedGrid.map(row => [...row]);
+
+    // Remove some numbers to create a puzzle
+    for (let i = 0; i < 40; i++) {
+      const row = Math.floor(Math.random() * 9);
+      const col = Math.floor(Math.random() * 9);
+      newBoard[row][col] = 0;
+    }
+
+    return newBoard;
+  }
+
+  // Function to display the board
+  function displayBoard() {
+    const container = document.createElement('div');
+
+    for (let i = 0; i < 9; i++) {
+      for (let j = 0; j < 9; j++) {
+        const cellValue = board[i][j];
+        const cellId = `cell-${i}-${j}`;
+        const cellElement = document.createElement('input');
+
+        cellElement.setAttribute('type', 'text');
+        cellElement.setAttribute('maxlength', '1');
+        cellElement.setAttribute('size', '1');
+        cellElement.setAttribute('id', cellId);
+        cellElement.addEventListener('input', (event) => onInputChange(event, i, j));
+
+        if (cellValue !== 0) {
+          cellElement.value = cellValue;
+          cellElement.disabled = true;
+        } else {
+          cellElement.value = '';
+          cellElement.disabled = false;
+        }
+
+        container.appendChild(cellElement);
+      }
+      container.appendChild(document.createElement('br'));
+    }
+
+    document.body.appendChild(container);
+  }
+
+  // Function to check if the move is valid
+  function isValidMove(row, col, value) {
+    // Check the row and column
+    for (let i = 0; i < 9; i++) {
+      if (board[row][i] === value || board[i][col] === value) {
+        return false;
+      }
+    }
+
+    // Check the 3x3 grid
+    const startRow = Math.floor(row / 3) * 3;
+    const startCol = Math.floor(col / 3) * 3;
+
+    for (let i = 0; i < 3; i++) {
+      for (let j = 0; j < 3; j++) {
+        if (board[startRow + i][startCol + j] === value) {
+          return false;
+        }
+      }
+    }
+
+    return true;
+  }
+
+  // Function to handle input changes
+  function onInputChange(event, i, j) {
+    const newValue = parseInt(event.target.value) || 0;
+
+    // Check if the move is valid
+    if (isValidMove(i, j, newValue)) {
+      board[i][j] = newValue;
+    } else {
+      alert('Invalid move. Please try again.');
+      event.target.value = '';
+    }
+
+    // Check if the board is solved
+    if (isBoardSolved()) {
+      alert('Congratulations! You solved the Sudoku!');
+    }
+  }
+
+  // Function to check if the board is solved
+  function isBoardSolved() {
+    // Implement your logic to check if the board is solved
+    // You can compare the current board state with the solution
+    for (let i = 0; i < 9; i++) {
+      for (let j = 0; j < 9; j++) {
+        if (board[i][j] === 0) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  // Call the init function to set up the board
+  init();
+</script>
+
+</body>
+</html>
