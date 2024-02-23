@@ -18,6 +18,9 @@
     <h1 id="score" style="margin:center;">
       Score: 0
   </h1>
+  <h1 id="highscore" style="margin:center;">
+    High Score: 
+  </h1>
     <canvas id="snakeCanvas" width="400" height="400"></canvas>
 
     <script>
@@ -34,6 +37,9 @@
 
         let direction = "right";
         let score = 0;
+        if (localStorage.highscore == undefined) {
+          localStorage.highscore = 0;
+        }
 
         function draw() {
             // Clear canvas
@@ -119,8 +125,15 @@
         }
 
         function updateScore() {
+            highscor = localStorage.highscore;
             const scoreElement = document.getElementById('score');
+            const highScoreElement = document.getElementById('highscore');
             scoreElement.textContent = `Score: ${score}`;
+            if (score > localStorage.highscore){
+              localStorage.highscore = score;
+              highScoreElement.textContent = `High Score: ${localStorage.highscore}`;
+            }
+            
         }
 
         document.addEventListener("keydown", (event) => {
