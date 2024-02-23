@@ -11,6 +11,12 @@
             display: block;
             margin: 20px auto;
         }
+      body {
+        background-color: black;
+      }
+      h1 {
+        color: white;
+      }
     </style>
 </head>
 
@@ -40,6 +46,7 @@
         if (localStorage.highscore == undefined) {
           localStorage.highscore = 0;
         }
+        document.getElementById('highscore').innerText = `High Score: ${localStorage.highscore}`;
 
         function draw() {
             // Clear canvas
