@@ -12,3 +12,7 @@
   max-width: 65%;
   max-height: 50%;
 }
+.gamesbutton {
+  background-image: linear-gradient(to right, red, orange, yellow, green, cyan, violet);
+  color: purple;
+}
