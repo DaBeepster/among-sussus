@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Snake Game</title>
+    <style>
+        canvas {
+            border: 1px solid #333;
+            display: block;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 id="score" style="margin:center;">
+      Score: 0
+  </h1>
+    <canvas id="snakeCanvas" width="400" height="400"></canvas>
+
+    <script>
+        const canvas = document.getElementById("snakeCanvas");
+        const ctx = canvas.getContext("2d");
+        var snkcol = prompt("Enter a hex code for the snake's color!", "#00FF99");
+        var fdcol = prompt("Enter a hex code for the food's color!", "#FF0000");
+
+        const boxSize = 20;
+        const canvasSize = 400;
+
+        let snake = [{ x: 10, y: 10 }];
+        let food = { x: 15, y: 15 };
+
+        let direction = "right";
+        let score = 0;
+
+        function draw() {
+            // Clear canvas
+            ctx.clearRect(0, 0, canvasSize, canvasSize);
+            // Draw snake
+            ctx.fillStyle = snkcol;
+            snake.forEach((segment) => {
+                ctx.fillRect(segment.x * boxSize, segment.y * boxSize, boxSize, boxSize);
+            });
+
+            // Draw food
+            ctx.fillStyle = fdcol;
+            ctx.fillRect(food.x * boxSize, food.y * boxSize, boxSize, boxSize);
+        }
+
+        function update() {
+            // Move snake
+            let newHead = { ...snake[0] };
+            switch (direction) {
+                case "up":
+                    newHead.y -= 1;
+                    break;
+                case "down":
+                    newHead.y += 1;
+                    break;
+                case "left":
+                    newHead.x -= 1;
+                    break;
+                case "right":
+                    newHead.x += 1;
+                    break;
+            }
+
+            // Check for collisions with walls or itself
+            if (
+                newHead.x < 0 ||
+                newHead.y < 0 ||
+                newHead.x * boxSize >= canvasSize ||
+                newHead.y * boxSize >= canvasSize ||
+                collision(newHead, snake)
+            ) {
+                alert("Game Over!");
+                resetGame();
+                return;
+            }
+
+            // Check for food
+            if (newHead.x === food.x && newHead.y === food.y) {
+                // Increase snake length
+                snake.unshift({ ...newHead });
+                // Generate new food
+                generateFood();
+                // Increase the score
+                score++;
+                updateScore(); // Call a function to update the score on the display
+            } else {
+                // Move snake
+                snake.pop();
+                snake.unshift(newHead);
+            }
+
+            // Draw everything
+            draw();
+        }
+
+        function generateFood() {
+            food = {
+                x: Math.floor(Math.random() * (canvasSize / boxSize)),
+                y: Math.floor(Math.random() * (canvasSize / boxSize)),
+            };
+        }
+
+        function collision(head, array) {
+            return array.some((segment) => segment.x === head.x && segment.y === head.y);
+        }
+
+        function resetGame() {
+            snake = [{ x: 10, y: 10 }];
+            food = { x: 15, y: 15 };
+            direction = "right";
+            score = 0;
+            updateScore(); // Reset the score display
+        }
+
+        function updateScore() {
+            const scoreElement = document.getElementById('score');
+            scoreElement.textContent = `Score: ${score}`;
+        }
+
+        document.addEventListener("keydown", (event) => {
+            switch (event.key) {
+                case "ArrowUp":
+                    direction = "up";
+                    break;
+                case "ArrowDown":
+                    direction = "down";
+                    break;
+                case "ArrowLeft":
+                    direction = "left";
+                    break;
+                case "ArrowRight":
+                    direction = "right";
+                    break;
+            }
+        });
+
+        // Initial setup
+        generateFood();
+        setInterval(update, 150);
+    </script>
+</body>
+
+</html>
