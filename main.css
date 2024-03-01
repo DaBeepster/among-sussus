@@ -1,8 +1,18 @@
+@font-face {
+  font-family: pRune;
+  src: url(/font/pixelrunes.ttf);
+  font-style: monospace;
+}
+@font-face {
+  font-family: pixelop;
+  src: url(/font/pixeloperator.woff2);
+  font-style: monospace;
+}
 .hi {
   display: inline-block;
   max-width: 100%;
   word-wrap: break-word;
-  font-family: monospace;
+  font-family: pixelop;
 }
 .buts {
   max-width: 25%;
@@ -11,8 +21,13 @@
 .tex {
   max-width: 65%;
   max-height: 50%;
+  height: 250px;
+  width: 65%;
 }
 .gamesbutton {
   background-image: linear-gradient(to right, red, orange, yellow, green, cyan, violet);
   color: purple;
+}
+.gamesbutton:hover {
+  cursor: pointer;
 }
