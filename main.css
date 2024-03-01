@@ -3,11 +3,16 @@
   src: url(/font/pixelrunes.ttf);
   font-style: monospace;
 }
+@font-face {
+  font-family: pixelop;
+  src: url(/font/pixeloperator.woff2);
+  font-style: monospace;
+}
 .hi {
   display: inline-block;
   max-width: 100%;
   word-wrap: break-word;
-  font-family: monospace;
+  font-family: pixelop;
 }
 .buts {
   max-width: 25%;
