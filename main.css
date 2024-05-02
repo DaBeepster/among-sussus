@@ -31,3 +31,6 @@
 .gamesbutton:hover {
   cursor: pointer;
 }
+img {
+  image-rendering: pixelated;
+}
