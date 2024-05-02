@@ -13,6 +13,7 @@
   max-width: 100%;
   word-wrap: break-word;
   font-family: pixelop;
+  white-space: pre-wrap;
 }
 .buts {
   max-width: 25%;
