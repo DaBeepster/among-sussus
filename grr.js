@@ -1,52 +1,132 @@
 function saveThree() {
   var area = document.getElementById('heh');
   var conten = area.value;
-  localStorage.thirdSave = conten;
+  var sav = localStorage.thirdSave;
+  var confirm = prompt(`This slot currently contains ${sav}. Are you sure you want to overwrite?`, "Y/N");
+  if (confirm.toUpperCase() == "Y") {
+    localStorage.thirdSave = conten;
+    alert("Saved!");
+  } else if (confirm.toUpperCase() == "N") {
+    alert("Save Cancelled");
+  } else {
+    console.log("Ag");
+  }
 }
 function loadThree() {
   var area = document.getElementById('heh');
   var yea = localStorage.thirdSave;
-  area.value = yea;
+  var confirm = prompt(`Currently saved: ${yea}. Load save?`, "Y/N");
+  if (confirm.toUpperCase() == "Y") {
+    area.value = yea;
+  } else if (confirm.toUpperCase() == "N") {
+    console.log("ok");
+  } else {
+    console.log("hm");
+  }
 }
 function saveFour() {
   var area = document.getElementById('heh');
   var conten = area.value;
-  localStorage.fourthSave = conten;
+  var sav = localStorage.fourthSave;
+  var confirm = prompt(`This slot currently contains ${sav}. Are you sure you want to overwrite?`, "Y/N");
+  if (confirm.toUpperCase() == "Y") {
+    localStorage.fourthSave = conten;
+    alert("Saved!");
+  } else if (confirm.toUpperCase() == "N") {
+    alert("Save Cancelled");
+  } else {
+    console.log("Ag");
+  }
 }
 function loadFour() {
   var area = document.getElementById('heh');
   var yea = localStorage.fourthSave;
-  area.value = yea;
+  var confirm = prompt(`Currently saved: ${yea}. Load save?`, "Y/N");
+  if (confirm.toUpperCase() == "Y") {
+    area.value = yea;
+  } else if (confirm.toUpperCase() == "N") {
+    console.log("ok");
+  } else {
+    console.log("hm");
+  }
 }
 function saveFive() {
   var area = document.getElementById('heh');
   var conten = area.value;
-  localStorage.fiveSave = conten;
+  var sav = localStorage.fiveSave;
+  var confirm = prompt(`This slot currently contains ${sav}. Are you sure you want to overwrite?`, "Y/N");
+  if (confirm.toUpperCase() == "Y") {
+    localStorage.fiveSave = conten;
+    alert("Saved!");
+  } else if (confirm.toUpperCase() == "N") {
+    alert("Save Cancelled");
+  } else {
+    console.log("Ag");
+  }
 }
 function loadFive() {
   var area = document.getElementById('heh');
-  var yesh = localStorage.fiveSave;
-  area.value = yesh;
+  var yea = localStorage.fiveSave;
+  var confirm = prompt(`Currently saved: ${yea}. Load save?`, "Y/N");
+  if (confirm.toUpperCase() == "Y") {
+    area.value = yea;
+  } else if (confirm.toUpperCase() == "N") {
+    console.log("ok");
+  } else {
+    console.log("hm");
+  }
 }
 function saveSix() {
-  var areea = document.getElementById('heh');
-  var contente = areea.value;
-  localStorage.sexthSave = contente;
+  var area = document.getElementById('heh');
+  var conten = area.value;
+  var sav = localStorage.sexthSave;
+  var confirm = prompt(`This slot currently contains ${sav}. Are you sure you want to overwrite?`, "Y/N");
+  if (confirm.toUpperCase() == "Y") {
+    localStorage.sexthSave = conten;
+    alert("Saved!");
+  } else if (confirm.toUpperCase() == "N") {
+    alert("Save Cancelled");
+  } else {
+    console.log("Ag");
+  }
 }
 function loadSix() {
-  var areea = document.getElementById('heh');
-  var yeet = localStorage.sexthSave;
-  areea.value = yeet;
+  var area = document.getElementById('heh');
+  var yea = localStorage.sexthSave;
+  var confirm = prompt(`Currently saved: ${yea}. Load save?`, "Y/N");
+  if (confirm.toUpperCase() == "Y") {
+    area.value = yea;
+  } else if (confirm.toUpperCase() == "N") {
+    console.log("ok");
+  } else {
+    console.log("hm");
+  }
 }
 function saveSeven() {
-  var ahe = document.getElementById('heh');
-  var stuf = ahe.value;
-  localStorage.sevenSave = stuf;
+  var area = document.getElementById('heh');
+  var conten = area.value;
+  var sav = localStorage.sevenSave;
+  var confirm = prompt(`This slot currently contains ${sav}. Are you sure you want to overwrite?`, "Y/N");
+  if (confirm.toUpperCase() == "Y") {
+    localStorage.sevenSave = conten;
+    alert("Saved!");
+  } else if (confirm.toUpperCase() == "N") {
+    alert("Save Cancelled");
+  } else {
+    console.log("Ag");
+  }
 }
 function loadSeven() {
-  var ahe = document.getElementById('heh');
-  var poh = localStorage.sevenSave;
-  ahe.value = poh;
+  var area = document.getElementById('heh');
+  var yea = localStorage.sevenSave;
+  var confirm = prompt(`Currently saved: ${yea}. Load save?`, "Y/N");
+  if (confirm.toUpperCase() == "Y") {
+    area.value = yea;
+  } else if (confirm.toUpperCase() == "N") {
+    console.log("ok");
+  } else {
+    console.log("hm");
+  }
 }
 function saveTemp() {
   var gyatt = document.getElementById('heh');
@@ -61,7 +141,15 @@ function loadTemp() {
 function saveImp() {
   var box = document.getElementById('heh');
   var content = box.value;
-  localStorage.importantSave = content;
+  var confirm = prompt("Are you sure you want to overwrite this save? Y/N");
+  if (confirm.toUpperCase() == "Y") {
+    localStorage.importantSave = content;
+    alert("saved!");
+  } else if (confirm.toUpperCase() == "N") {
+    alert("save cancelled");
+  } else {
+    console.log("suss");
+  }
 }
 function loadImp() {
   var box = document.getElementById('heh');

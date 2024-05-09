@@ -24,8 +24,8 @@
   max-height: 50%;
   height: 250px;
   width: 65%;
-  background-color:white;
-  color:black;
+  background-color:black;
+  color:lime;
 }
 .gamesbutton {
   background-image: linear-gradient(to right, red, orange, yellow, green, cyan, violet);
@@ -42,7 +42,7 @@ img {
   image-rendering: pixelated;
 }
 body {
-  background-color: gray;
+  background-color: white;
   color: black;
 }
 button {

@@ -33,22 +33,56 @@ function deur() {
   place.value = nice;
 }
 function save1() {
-  var AH = document.getElementById("heh");
-  var txt = AH.value;
-  localStorage.piss = txt;
+  var area = document.getElementById('heh');
+  var conten = area.value;
+  var sav = localStorage.piss;
+  var confirm = prompt(`This slot currently contains ${sav}. Are you sure you want to overwrite?`, "Y/N");
+  if (confirm.toUpperCase() == "Y") {
+    localStorage.piss = conten;
+    alert("Saved!");
+  } else if (confirm.toUpperCase() == "N") {
+    alert("Save Cancelled");
+  } else {
+    console.log("Ag");
+  }
 }
 function load1() {
-  var hm = localStorage.piss;
-  document.getElementById("heh").value = hm;
+  var area = document.getElementById('heh');
+  var yea = localStorage.piss;
+  var confirm = prompt(`Currently saved: ${yea}. Load save?`, "Y/N");
+  if (confirm.toUpperCase() == "Y") {
+    area.value = yea;
+  } else if (confirm.toUpperCase() == "N") {
+    console.log("ok");
+  } else {
+    console.log("hm");
+  }
 }
 function save2() {
-  var content = document.getElementById("heh");
-  var txt = content.value;
-  localStorage.sav2 = txt;
+  var area = document.getElementById('heh');
+  var conten = area.value;
+  var sav = localStorage.sav2;
+  var confirm = prompt(`This slot currently contains ${sav}. Are you sure you want to overwrite?`, "Y/N");
+  if (confirm.toUpperCase() == "Y") {
+    localStorage.sav2 = conten;
+    alert("Saved!");
+  } else if (confirm.toUpperCase() == "N") {
+    alert("Save Cancelled");
+  } else {
+    console.log("Ag");
+  }
 }
 function load2() {
-  var tex = localStorage.sav2;
-  document.getElementById("heh").value = tex;
+  var area = document.getElementById('heh');
+  var yea = localStorage.sav2;
+  var confirm = prompt(`Currently saved: ${yea}. Load save?`, "Y/N");
+  if (confirm.toUpperCase() == "Y") {
+    area.value = yea;
+  } else if (confirm.toUpperCase() == "N") {
+    console.log("ok");
+  } else {
+    console.log("hm");
+  }
 }
 function toRoman(num) {
     const romanNumerals = {
