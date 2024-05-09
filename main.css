@@ -24,6 +24,8 @@
   max-height: 50%;
   height: 250px;
   width: 65%;
+  background-color:white;
+  color:black;
 }
 .gamesbutton {
   background-image: linear-gradient(to right, red, orange, yellow, green, cyan, violet);
@@ -32,6 +34,18 @@
 .gamesbutton:hover {
   cursor: pointer;
 }
+.savebutton {
+  background-color: green;
+  color: black;
+}
 img {
   image-rendering: pixelated;
+}
+body {
+  background-color: gray;
+  color: black;
+}
+button {
+  background-color:lightgray;
+  color: black;
 }

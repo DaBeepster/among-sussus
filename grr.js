@@ -68,3 +68,26 @@ function loadImp() {
   var savedcontent = localStorage.importantSave;
   box.value = savedcontent;
 }
+function linkTemplate() {
+  var thing = atob("PGEgaHJlZj0iIiB0YXJnZXQ9Il9ibGFuayI+TGluazwvYT4=");
+  document.getElementById('heh').value = thing;
+}
+function iframeTemplate() {
+  var thingy = atob("PGlmcmFtZSBzcmM9IiIgd2lkdGg9IjY5MHB4IiBoZWlnaHQ9IjY5MHB4Ij48L2lmcmFtZT4=");
+  document.getElementById('heh').value = thingy;
+}
+function imageTemplate() {
+  var imag = atob("PGltZyBzcmM9IiIgYWx0PSJ3aG9vcHMiIHdpZHRoPSI0ODBweCIvPg==");
+  document.getElementById('heh').value = imag;
+}
+function encodeAllHtmlEntities(str) {
+    return str.split('').map(char => {
+        const code = char.charCodeAt(0);
+        return `&#${code};`;
+    }).join('');
+}
+function encodeHtml() {
+  var thetext = document.getElementById('heh').value;
+  var encodedText = encodeAllHtmlEntities(thetext);
+  document.getElementById('heh').value = encodedText;
+}
