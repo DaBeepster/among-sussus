@@ -179,3 +179,9 @@ function encodeHtml() {
   var encodedText = encodeAllHtmlEntities(thetext);
   document.getElementById('heh').value = encodedText;
 }
+function decodeHtml() {
+  var thetext = document.getElementById('heh').value;
+  var area = document.getElementById('heh');
+  document.getElementById('heh').innerHTML = thetext;
+  document.getElementById('heh').value = area.innerHTML;
+}

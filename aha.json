@@ -1,0 +1,6 @@
+{
+  "people": [
+    {"firstName":"Joe", "lastName":"Hanson", "age":67},
+    {"firstName":"Hank", "lastName":"Zonder", "age":43}
+  ]
+}

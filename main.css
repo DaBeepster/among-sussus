@@ -12,7 +12,7 @@
   display: inline-block;
   max-width: 100%;
   word-wrap: break-word;
-  font-family: pixelop;
+  font-family: monospace;
   white-space: pre-wrap;
   font-size: 20px;
 }
@@ -38,7 +38,7 @@
   cursor: pointer;
 }
 .savebutton {
-  background-color: green;
+  background-color: lime;
   color: black;
 }
 img {
